@@ -1,0 +1,42 @@
+/*
+tsconfig.json是一个TypeScript项目的配置文件，
+这个文件指定了TypeScript编译器如何编译当前项目，
+包括编译选项、文件包含和排除规则等.
+*/
+{
+/* 
+compilerOptions 包含了TypeScript编译器的各种选项，
+比如模块解析策略、目标ECMAScript版本、是否允许JSX等。
+*/ 
+  "compilerOptions": {
+    //src别名的配置(vite.config.ts和tsconfig.json)
+    "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
+    "paths": { //路径映射，相对于baseUrl
+      "@/*": ["src/*"] 
+    },
+    //Element Plus全局组件类型声明
+    "types": ["element-plus/global"],
+
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "preserve",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
