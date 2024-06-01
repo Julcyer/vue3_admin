@@ -16,8 +16,8 @@ import useUserStore from '@/store/modules/user'
 import pinia from '@/store'
 const userStore = useUserStore(pinia)
 //vue router中的全局守卫(导航守卫):项目当中任意路由切换都会触发的钩子
-//全局前置守卫,to:你将要访问那个路由,from:你从来个路由而来,next:路由的放行函数
-router.beforeEach(async (to: any, from: any, next: any) => {
+//全局前置守卫,to:你将要访问那个路由,from:你从来个路由而来(_:js占位符,表示变量没实际使用),next:路由的放行函数
+router.beforeEach(async (to, _from, next) => {
   //获取token,去判断用户登录、还是未登录
   const token = userStore.token
   //获取用户名字,用于判断是否有用户信息
@@ -63,8 +63,8 @@ router.beforeEach(async (to: any, from: any, next: any) => {
   // 进度条开始
   nprogress.start()
 })
-//全局后置守卫
-router.afterEach((to: any, from: any) => {
+//全局后置守卫,_:js占位符,表示变量没实际使用
+router.afterEach((_to: any, _from: any) => {
   // 进度条消失
   nprogress.done()
 })

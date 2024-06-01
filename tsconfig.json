@@ -14,8 +14,6 @@ compilerOptions 包含了TypeScript编译器的各种选项，
     "paths": { //路径映射，相对于baseUrl
       "@/*": ["src/*"] 
     },
-    //Element Plus全局组件类型声明
-    "types": ["element-plus/global"],
 
     "target": "ES2020",
     "useDefineForClassFields": true,

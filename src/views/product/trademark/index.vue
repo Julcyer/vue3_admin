@@ -14,13 +14,13 @@
                 <el-table-column align="center" label="名称" prop="tmName"></el-table-column>
                 <el-table-column align="center" label="LOGO">
                     <!-- 结构赋值row:当前行的数据 $index:当前行的索引 -->
-                    <template #="{ row, $index }">
+                    <template #="{ row }">
                         <img :src="row.logoUrl" style="max-width: 128px; max-height: 128px;" alt="图片加载失败">
                     </template>
                 </el-table-column>
                 <el-table-column align="center" label="操作">
                     <!-- 结构赋值row:当前行的数据 $index:当前行的索引 -->
-                    <template #="{ row, $index }">
+                    <template #="{ row }">
                         <!-- 修改按钮 -->
                         <el-button type="primary" size="small" icon="Edit" @click="updateTrademark(row)" v-btn="'btn.Trademark.update'"></el-button>
                         <!-- Popconfirm气泡确认框 title标题(文本) confirm:点击确认按钮时触发事件 -->
@@ -78,7 +78,8 @@
 
 <script setup lang="ts">
 // ElMessage,Message消息提示 UploadProps,el-plus中Upload上传组件的ts类型
-import { ElMessage, type UploadProps, formEmits } from 'element-plus'
+import { ElMessage, type UploadProps } from 'element-plus'
+// import { ElMessage, type UploadProps, formEmits } from 'element-plus'
 //onMounted:组件挂载完毕钩子
 import { ref, onMounted, reactive, nextTick } from 'vue';
 //引入品牌管理接口和ts类型
@@ -217,7 +218,7 @@ const beforeAvatarUpload: UploadProps['beforeUpload'] = (rawFile) => {
     }
 }
 //图片上传成功钩子
-const handleAvatarSuccess: UploadProps['onSuccess'] = (response, uploadFile) => {
+const handleAvatarSuccess: UploadProps['onSuccess'] = (response, _uploadFile) => {
     //response:即为当前这次上传图片post请求服务器返回的数据
     //收集上传图片的地址,添加一个新的品牌的时候带给服务器
     trademarkParams.logoUrl = response.data;
@@ -226,7 +227,7 @@ const handleAvatarSuccess: UploadProps['onSuccess'] = (response, uploadFile) => 
 }
 
 //品牌自定义校验规则方法,el表单的自定义校验中回调函数(callBack)必须被调用,在表单校验规则对象rules中使用
-const validatorTmName = (rule: any, value: any, callBack: any) => {
+const validatorTmName = (_rule: any, value: any, callBack: any) => {
     //当表单元素触发blur(元素失去焦点时触发)时候,会触发此方法
     //trim(),js的方法,去除字符串两端的空白字符
     if (value.trim().length >= 2) {
@@ -237,7 +238,7 @@ const validatorTmName = (rule: any, value: any, callBack: any) => {
     }
 }
 //品牌LOGO图片的自定义校验规则方法,在下面rules中使用
-const validatorLogoUrl = (rule: any, value: any, callBack: any) => {
+const validatorLogoUrl = (_rule: any, value: any, callBack: any) => {
     //如果图片上传
     if (value) {
         callBack();

@@ -1,6 +1,6 @@
 <!-- 递归生成菜单 -->
 <template>
-    <template v-for="(item, index) in menuList" :key="item.path">
+    <template v-for="(item, _index) in menuList" :key="item.path">
         <!--没有子路由-->
         <template v-if="!item.children">
             <!-- index:唯一标志,在这里同时用作存储路径 -->

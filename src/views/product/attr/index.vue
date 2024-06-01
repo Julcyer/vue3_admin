@@ -14,15 +14,15 @@
                     <el-table-column label="属性名称" width="120px" prop="attrName"></el-table-column>
                     <el-table-column label="属性值名称">
                         <!-- 结构赋值row:当前行的数据 $index:当前行的索引 -->
-                        <template #="{ row, $index }">
+                        <template #="{ row }">
                             <!-- Tag标签  -->
-                            <el-tag style="margin:5px" v-for="(item, index) in row.attrValueList" :key="item.id">
+                            <el-tag style="margin:5px" v-for="(item, _index) in row.attrValueList" :key="item.id">
                                 {{ item.valueName }}</el-tag>
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" width="120px">
                         <!-- row：已有的属性对象 -->
-                        <template #="{ row, $index }">
+                        <template #="{ row }">
                             <!-- 修改已有属性的按钮 -->
                             <el-button type="primary" size="small" icon="Edit" @click="updateAttr(row)" v-btn="'btn.Attr.update'"></el-button>
                             <!-- Popconfirm气泡确认框 title标题(文本) confirm:点击确认按钮时触发事件 -->
@@ -66,7 +66,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column label="属性值操作">
-                        <template #="{ row, index }">
+                        <template #="{ index }">
                             <el-button type="primary" size="small" icon="Delete"
                                 @click="attrParams.attrValueList.splice(index, 1)"></el-button>
                         </template>

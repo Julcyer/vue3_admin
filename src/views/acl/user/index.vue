@@ -27,7 +27,7 @@
             <el-table-column label="创建时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
             <el-table-column label="更新时间" align="center" prop="updateTime" show-overflow-tooltip></el-table-column>
             <el-table-column label="操作" width="300px" align="center">
-                <template #="{ row, $index }">
+                <template #="{ row }">
                     <el-button type="primary" size="small" icon="User" @click="setRole(row)"
                         v-btn="'btn.User.assgin'">分配角色</el-button>
                     <el-button type="primary" size="small" icon="Edit" @click="updateUser(row)"
@@ -88,11 +88,11 @@
                     <el-input v-model="userParams.username" :disabled="true"></el-input>
                 </el-form-item>
                 <el-form-item label="职位列表">
-                    <!-- Checkbox多选框 -->
-                    <el-checkbox @change:boolean="handleCheckAllChange" v-model="checkAll"
+                    <!-- Checkbox多选框 indeterminate:表示checkbox的不确定状态,一般用于实现全选的效果 -->
+                    <el-checkbox v-model="checkAll" @change="handleCheckAllChange"
                         :indeterminate="isIndeterminate">全选</el-checkbox>
                     <!-- 显示职位的的复选框 -->
-                    <el-checkbox-group v-model="userRole" @change:AllRole="handleCheckedCitiesChange">
+                    <el-checkbox-group v-model="userRole" @change="handleCheckedCitiesChange">
                         <el-checkbox v-for="(role, index) in allRole" :key="index" :label="role">{{ role.roleName
                             }}</el-checkbox>
                     </el-checkbox-group>
@@ -223,7 +223,7 @@ const cancel = () => {
     drawer.value = false;
 }
 //校验用户名字回调函数,el表单的自定义校验中回调函数(callBack)必须被调用,在表单校验规则对象rules中使用
-const validatorUsername = (rule: any, value: any, callBack: any) => {
+const validatorUsername = (_rule: any, value: any, callBack: any) => {
     //用户名字|昵称,长度至少五位
     //trim(),js的方法,去除字符串两端的空白字符
     if (value.trim().length >= 5) {
@@ -233,7 +233,7 @@ const validatorUsername = (rule: any, value: any, callBack: any) => {
     }
 }
 //校验用户名字回调函数
-const validatorname = (rule: any, value: any, callBack: any) => {
+const validatorname = (_rule: any, value: any, callBack: any) => {
     //用户名字|昵称,长度至少五位
     if (value.trim().length >= 5) {
         callBack();
@@ -241,7 +241,7 @@ const validatorname = (rule: any, value: any, callBack: any) => {
         callBack(new Error('用户昵称至少五位'))
     }
 }
-const validatorPassword = (rule: any, value: any, callBack: any) => {
+const validatorPassword = (_rule: any, value: any, callBack: any) => {
     //用户名字|昵称,长度至少五位
     if (value.trim().length >= 6) {
         callBack();
@@ -269,6 +269,10 @@ const setRole = async (row: User) => {
         allRole.value = result.data.allRolesList;
         //存储当前用户已有的职位
         userRole.value = result.data.assignRoles;
+
+        console.log(result)
+        console.log(allRole.value)
+        console.log(userRole.value)
         //抽屉显示出来
         drawer1.value = true;
     }
@@ -291,7 +295,7 @@ const handleCheckedCitiesChange = (value: string[]) => {
     //代表:勾选上的项目个数与全部的职位个数相等，顶部的复选框勾选上
     checkAll.value = value.length === allRole.value.length;
     //不确定的样式
-    isIndeterminate.value = value.length !== allRole.value.length
+    isIndeterminate.value = value.length > 0 && value.length < allRole.value.length
 }
 //确定按钮的回调(分配职位)
 const confirmClick = async () => {

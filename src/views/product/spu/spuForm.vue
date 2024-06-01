@@ -6,7 +6,7 @@
         </el-form-item>
         <el-form-item label="SPU品牌">
             <el-select v-model="SpuParams.tmId">
-                <el-option v-for="(item, index) in AllTradeMark" :key="item.id" :label="item.tmName"
+                <el-option v-for="(item, _index) in AllTradeMark" :key="item.id" :label="item.tmName"
                     :value="item.id"></el-option>
             </el-select>
         </el-form-item>
@@ -18,7 +18,7 @@
             的proxy(代理跨域)的拦截路径(/api) list-type:设定文件列表的样式 on-preview:点击文件列表中已上传的文件时的钩子
             on-remove:文件列表移除文件时的钩子 before-upload:上传文件之前的钩子(函数),参数为上传的文件,
             可以用于限制文件类型和大小,若返回false或者返回Promise且被reject,则停止上传 -->
-            <el-upload v-model:file-list="<any>imgList" action="/api/admin/product/fileUpload" list-type="picture-card"
+            <el-upload v-model:file-list="imgList" action="/api/admin/product/fileUpload" list-type="picture-card"
                 :on-preview="handlePictureCardPreview" :on-remove="handleRemove" :before-upload="handlerUpload">
                 <el-icon>
                     <Plus />
@@ -34,7 +34,7 @@
             <!-- 展示销售属性的下拉菜单 -->
             <el-select v-model="saleAttrIdAndValueName"
                 :placeholder="unSelectSaleAttr.length ? `还未选择${unSelectSaleAttr.length}个` : '无'">
-                <el-option :value="`${item.id}:${item.name}`" v-for="(item, index) in unSelectSaleAttr" :key="item.id"
+                <el-option :value="`${item.id}:${item.name}`" v-for="(item, _index) in unSelectSaleAttr" :key="item.id"
                     :label="item.name"></el-option>
             </el-select>
             <!-- disabled:是否禁用该选项 -->
@@ -46,7 +46,7 @@
                 <el-table-column label="销售属性名字" width="120px" prop="saleAttrName"></el-table-column>
                 <el-table-column label="销售属性值">
                     <!-- row:即为当前SPU已有的销售属性对象 -->
-                    <template #="{ row, $index }">
+                    <template #="{ row }">
                         <!-- Tag标签 close:关闭Tag时触发的事件 closable:是否可关闭 -->
                         <el-tag style="margin:0px 5px" @close="row.spuSaleAttrValueList.splice(index, 1)"
                             v-for="(item, index) in row.spuSaleAttrValueList" :key="row.id" class="mx-1" closable>
@@ -59,7 +59,7 @@
                     </template>
                 </el-table-column>
                 <el-table-column label="操作" width="120px">
-                    <template #="{ row, $index }">
+                    <template #="{ $index }">
                         <!-- 增删数组splice(下标,删多少(默认后面全删),新元素) -->
                         <el-button type="primary" size="small" icon="Delete"
                             @click="saleAttr.splice($index, 1)"></el-button>

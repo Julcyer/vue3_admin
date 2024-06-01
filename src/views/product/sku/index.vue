@@ -8,7 +8,7 @@
             <el-table-column label="描述" show-overflow-tooltip align="center" min-width="150px"
                 prop="skuDesc"></el-table-column>
             <el-table-column label="图片" align="center" width="150px">
-                <template #="{ row, $index }">
+                <template #="{ row }">
                     <img :src="row.skuDefaultImg" alt="" style="width: 100px;height: 100px;">
                 </template>
             </el-table-column>
@@ -16,7 +16,7 @@
             <el-table-column label="价格" align="center" width="150px" prop="price"></el-table-column>
             <!-- fixed:固定列,布尔或字符串left/right -->
             <el-table-column label="操作" align="center" width="250px" fixed="right">
-                <template #="{ row, $index }">
+                <template #="{ row }">
                     <!-- 上/下架按钮 -->
                     <el-button type="primary" size="small" :icon="row.isSale == 1 ? 'Bottom' : 'Top'"
                         @click="updateSale(row)" :title="row.isSale == 1 ? '上架商品' : '下架商品'"
@@ -122,7 +122,7 @@ const getHasSku = async (pager = 1) => {
     }
 }
 //分页器下拉菜单发生变化触发
-const handler = (pageSizes: number) => {
+const handler = (_pageSizes: number) => {
     getHasSku();
 }
 //商品的上架与下架的操作
@@ -146,10 +146,10 @@ const updateSale = async (row: SkuData) => {
         getHasSku(pageNo.value);
     }
 }
-//更新已有的SKU
-const updateSku = () => {
-    ElMessage({ type: 'success', message: '程序员在努力的更新中....' })
-}
+// //更新已有的SKU
+// const updateSku = () => {
+//     ElMessage({ type: 'success', message: '程序员在努力的更新中....' })
+// }
 //查看商品详情按钮的回调
 const findSku = async (row: SkuData) => {
     //抽屉展示出来

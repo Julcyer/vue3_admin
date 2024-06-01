@@ -16,6 +16,8 @@ export default defineConfig(({ command, mode }) => {
   */
   let env = loadEnv(mode, process.cwd());
   return {
+    // 打包的相对路径
+    base: './',
     plugins: [vue(),
     //配置SVG图标
     createSvgIconsPlugin({

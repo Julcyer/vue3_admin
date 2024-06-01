@@ -22,7 +22,7 @@
             <el-table-column label="更新时间" align="center" show-overflow-tooltip prop="updateTime"></el-table-column>
             <el-table-column label="操作" width="280px" align="center">
                 <!-- row:已有的职位对象 -->
-                <template #="{ row, $index }">
+                <template #="{ row }">
                     <el-button type="primary" size="small" icon="User" @click="setPermisstion(row)"
                         v-btn="'btn.Role.assgin'">分配权限</el-button>
                     <el-button type="primary" size="small" icon="Edit" @click="updateRole(row)"
@@ -167,7 +167,7 @@ const updateRole = (row: RoleData) => {
     })
 }
 //自定义校验规则的回调
-const validatorRoleName = (rule: any, value: any, callBack: any) => {
+const validatorRoleName = (_rule: any, value: any, callBack: any) => {
     if (value.trim().length >= 2) {
         callBack();
     } else {
