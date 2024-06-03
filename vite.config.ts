@@ -26,10 +26,10 @@ export default defineConfig(({ command, mode }) => {
       // 指定 symbolId 格式(Specify symbolId format)
       symbolId: 'icon-[dir]-[name]',
     }),
-    //配置mock
-    viteMockServe({
-      enable: command === 'serve',    //保证开发阶段可以使用mock接口
-    })
+    // //配置mock
+    // viteMockServe({
+    //   enable: command === 'serve',    //保证开发阶段可以使用mock接口
+    // })
     ],
     //代理跨域
     server: {

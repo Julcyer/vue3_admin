@@ -80,7 +80,7 @@ const login = async () => {
     });
     //登录成功加载效果也消失
     loading.value = false;
-  } catch (error:any) {
+  } catch (error: any) {
     //登录失败加载效果消失
     loading.value = false;
     //登录失败的提示信息
@@ -99,27 +99,27 @@ const login = async () => {
   /* 100vh表示窗口高度的100% */
   height: 100vh;
   /* no-repeat表示图片只会显示一次，不会在元素的背景上重复 */
-  /* background: url('@/assets/images/background.jpg') no-repeat; */
+  background: url('@/assets/images/background.jpg') no-repeat;
   /* cover,保持宽高比 */
-  /* background-size: cover; */
+  background-size: cover;
 
   .login_form {
     position: relative;
     /* relative,根据原本的位置(定位前)进行定位 */
     width: 80%;
     top: 30vh;
-    /* background: url("@/assets/images/login_form.png") no-repeat;
-    background-size: cover; */
+    background: url("@/assets/images/login_form.png") no-repeat;
+    background-size: cover;
     padding: 40px;
 
     h1 {
-      color: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
       font-size: 40px;
     }
 
     h2 {
       font-size: 20px;
-      color: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
       margin: 20px 0px;
     }
 
