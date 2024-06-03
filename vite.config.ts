@@ -17,7 +17,8 @@ export default defineConfig(({ command, mode }) => {
   let env = loadEnv(mode, process.cwd());
   return {
     // 打包的路径
-    base: '/vue3_admin/',
+    // base: '/vue3_admin/',
+    base: './',
     plugins: [vue(),
     //配置SVG图标
     createSvgIconsPlugin({

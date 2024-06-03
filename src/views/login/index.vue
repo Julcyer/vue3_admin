@@ -9,7 +9,7 @@
         <!-- <el-form class="login_form" :model="loginForm" :rules="rules" ref="loginForms"> -->
         <el-form class="login_form" :model="loginForm" ref="loginForms">
           <h1>Hello</h1>
-          <h2>欢迎来到硅谷甄选</h2>
+          <h2>欢迎来到某某商城</h2>
           <!-- prop属性的值应该与:model绑定的对象中的属性名相匹配,这样，Element UI知道如何将这个表单项的值与对应的验证规则关联起来。-->
           <el-form-item prop="username">
             <!-- prefix-icon添加一个前缀图标 -->
